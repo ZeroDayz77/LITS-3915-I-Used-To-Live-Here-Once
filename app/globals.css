@@ -7,10 +7,15 @@
 }
 
 :root {
-  --color-bg: #0a0a0a;
-  --color-text: #e8e0d4;
-  --color-accent: #c9a96e;
-  --color-muted: #6b6356;
+  --color-bg: #ffffff;
+  --color-text: #1a1a1a;
+  --color-accent: #8b5e2a;
+  --color-muted: #7a7068;
+  --panel-bg: rgba(255, 255, 255, 0.55);
+  --panel-border: rgba(255, 255, 255, 0.35);
+  --vignette-inset: 78%;
+  --vignette-strength: 0.08;
+  --bg-wash: rgba(255, 255, 255, 0.45);
   --font-serif: Georgia, "Times New Roman", serif;
   --font-sans: system-ui, sans-serif;
 }
@@ -37,42 +42,97 @@ body {
   overflow: hidden;
 }
 
+.bg-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.bg-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform-origin: center center;
+  will-change: transform, opacity;
+  opacity: 0;
+  /* Soft fade on all four edges via mask */
+  -webkit-mask-image:
+    linear-gradient(to right,  transparent 0%, black 12%, black 88%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+  mask-image:
+    linear-gradient(to right,  transparent 0%, black 12%, black 88%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+  -webkit-mask-composite: destination-in;
+  mask-composite: intersect;
+}
+
+
+/* Mood-driven tint overlay on top of each background image */
+.bg-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* Base layer: always-on white wash so text is readable from the start.
+     Mood overlay sits on top and darkens as the story progresses. */
+  background:
+    radial-gradient(
+      circle at center,
+      transparent 0,
+      transparent var(--vignette-inset),
+      rgba(0, 0, 0, var(--vignette-strength)) 100%
+    ),
+    var(--mood-overlay, transparent),
+    var(--bg-wash);
+  pointer-events: none;
+  transition: background 0.1s linear;
+}
+
 .parallax-track {
   display: flex;
   flex-direction: row;
   height: 100%;
   will-change: transform;
+  position: relative;
+  z-index: 1;
 }
 
 .parallax-panel {
   flex: 0 0 100vw;
   height: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
-  padding: 4rem;
+  padding: 0 4rem 6rem;
 }
 
 .panel-inner {
   max-width: 640px;
   width: 100%;
+  text-align: center;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 1.25rem 2rem;
+  transition: background-color 0.1s linear, border-color 0.1s linear;
+  /* Feathered edges via mask — fades to transparent on all sides */
+  -webkit-mask-image:
+    linear-gradient(to right,  transparent 0%, black 5%, black 95%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  mask-image:
+    linear-gradient(to right,  transparent 0%, black 5%, black 95%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  -webkit-mask-composite: destination-in;
+  mask-composite: intersect;
 }
 
 .panel-label {
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-  margin-bottom: 1.5rem;
+  display: none;
 }
 
 .panel-heading {
-  font-size: clamp(1.75rem, 4vw, 3rem);
-  font-weight: normal;
-  line-height: 1.2;
-  color: var(--color-accent);
-  margin-bottom: 1.5rem;
+  display: none;
 }
 
 .panel-body {
@@ -92,13 +152,51 @@ body {
 }
 
 .progress-dot {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background-color: var(--color-muted);
-  transition: background-color 0.3s ease;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.progress-dot:hover {
+  transform: scale(1.4);
 }
 
 .progress-dot.active {
   background-color: var(--color-accent);
+  transform: scale(1.3);
 }
+
+/* Side chevron navigation */
+.chevron {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 4rem;
+  line-height: 1;
+  color: var(--color-text);
+  opacity: 0.35;
+  padding: 0 1.5rem;
+  transition: opacity 0.2s ease, color 0.3s ease;
+  user-select: none;
+}
+
+.chevron:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.chevron:disabled {
+  opacity: 0.1;
+  cursor: default;
+}
+
+.chevron-left  { left: 0; }
+.chevron-right { right: 0; }
