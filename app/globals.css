@@ -30,6 +30,54 @@ body {
   overflow-x: hidden;
 }
 
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: #ffffff;
+  display: grid;
+  place-items: center;
+}
+
+.intro-title {
+  color: #1a1a1a;
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3.8vw, 3rem);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-align: center;
+  opacity: 0;
+  animation: introTitleFade 3s ease forwards;
+}
+
+.story-shell {
+  opacity: 0;
+  transition: opacity 700ms ease;
+}
+
+.story-shell.intro-complete {
+  opacity: 1;
+}
+
+@keyframes introTitleFade {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  22% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  72% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
 .parallax-wrapper {
   height: 500vh;
   position: relative;

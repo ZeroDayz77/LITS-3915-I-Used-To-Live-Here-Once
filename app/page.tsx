@@ -59,6 +59,26 @@ export default function Home() {
   const trackRef = useRef<HTMLDivElement>(null);
   const bgRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [activePanel, setActivePanel] = useState(0);
+  const [showIntro, setShowIntro] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowIntro(false);
+    }, 3000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
+  useEffect(() => {
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = showIntro ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [showIntro]);
 
   const scrollToPanel = (index: number) => {
     const maxScroll = document.body.scrollHeight - window.innerHeight;
@@ -172,67 +192,75 @@ export default function Home() {
 
   return (
     <main>
-      <div className="parallax-wrapper">
-        <div className="parallax-sticky">
-          <div className="bg-layer">
-            {panels.map((panel, i) => (
-              <div
-                key={panel.label}
-                ref={(el) => { bgRefs.current[i] = el; }}
-                className="bg-image"
-                style={{
-                  backgroundImage: panel.background ? `url(${panel.background})` : "none",
-                  backgroundPosition: panel.bgPosition ?? "center",
-                  opacity: i === 0 ? 1 : 0,
-                }}
-              />
-            ))}
-          </div>
+      {showIntro && (
+        <div className="intro-overlay" aria-hidden="true">
+          <h1 className="intro-title">I Used To Live Here Once</h1>
+        </div>
+      )}
 
-          <div className="parallax-track" ref={trackRef}>
-            {panels.map((panel) => (
-              <section key={panel.label} className="parallax-panel">
-                <div className="panel-inner">
-                  <p className="panel-label">{panel.label}</p>
-                  <h2 className="panel-heading">{panel.heading}</h2>
-                  <p className="panel-body">{panel.body}</p>
-                </div>
-              </section>
-            ))}
+      <div className={`story-shell${showIntro ? "" : " intro-complete"}`}>
+        <div className="parallax-wrapper">
+          <div className="parallax-sticky">
+            <div className="bg-layer">
+              {panels.map((panel, i) => (
+                <div
+                  key={panel.label}
+                  ref={(el) => { bgRefs.current[i] = el; }}
+                  className="bg-image"
+                  style={{
+                    backgroundImage: panel.background ? `url(${panel.background})` : "none",
+                    backgroundPosition: panel.bgPosition ?? "center",
+                    opacity: i === 0 ? 1 : 0,
+                  }}
+                />
+              ))}
+            </div>
+
+            <div className="parallax-track" ref={trackRef}>
+              {panels.map((panel) => (
+                <section key={panel.label} className="parallax-panel">
+                  <div className="panel-inner">
+                    <p className="panel-label">{panel.label}</p>
+                    <h2 className="panel-heading">{panel.heading}</h2>
+                    <p className="panel-body">{panel.body}</p>
+                  </div>
+                </section>
+              ))}
+            </div>
           </div>
         </div>
+
+        <nav className="progress-bar" aria-label="Story progress">
+          {panels.map((_, i) => (
+            <button
+              type="button"
+              key={panels[i].label}
+              className={`progress-dot${i === activePanel ? " active" : ""}`}
+              onClick={() => scrollToPanel(i)}
+              aria-label={`Go to panel ${i + 1}`}
+            />
+          ))}
+        </nav>
+
+        <button
+          type="button"
+          className="chevron chevron-left"
+          onClick={() => scrollToPanel(Math.max(0, activePanel - 1))}
+          aria-label="Previous panel"
+          disabled={activePanel === 0}
+        >
+          &#8249;
+        </button>
+        <button
+          type="button"
+          className="chevron chevron-right"
+          onClick={() => scrollToPanel(Math.min(panels.length - 1, activePanel + 1))}
+          aria-label="Next panel"
+          disabled={activePanel === panels.length - 1}
+        >
+          &#8250;
+        </button>
       </div>
-
-      <nav className="progress-bar" aria-label="Story progress">
-        {panels.map((_, i) => (
-          <button
-            type="button"
-            key={panels[i].label}
-            className={`progress-dot${i === activePanel ? " active" : ""}`}
-            onClick={() => scrollToPanel(i)}
-            aria-label={`Go to panel ${i + 1}`}
-          />
-        ))}
-      </nav>
-
-      <button
-        type="button"
-        className="chevron chevron-left"
-        onClick={() => scrollToPanel(Math.max(0, activePanel - 1))}
-        aria-label="Previous panel"
-        disabled={activePanel === 0}
-      >
-        &#8249;
-      </button>
-      <button
-        type="button"
-        className="chevron chevron-right"
-        onClick={() => scrollToPanel(Math.min(panels.length - 1, activePanel + 1))}
-        aria-label="Next panel"
-        disabled={activePanel === panels.length - 1}
-      >
-        &#8250;
-      </button>
     </main>
   );
 }
