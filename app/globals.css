@@ -348,6 +348,9 @@ body {
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   padding: 1rem;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .content-card h2 {
@@ -358,16 +361,49 @@ body {
 .content-card p {
   line-height: 1.7;
   color: #2b1b10;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.references-section {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.works-cited-container {
+  background: rgba(255, 255, 255, 0.58);
+  border: 1px solid rgba(95, 64, 38, 0.26);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  padding: 2.5rem 2rem;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.works-cited-heading {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.02em;
 }
 
 .works-cited-list {
-  padding-left: 1.2rem;
-  display: grid;
-  gap: 0.85rem;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.works-cited-list li {
-  line-height: 1.7;
+.citation-entry {
+  line-height: 2.0;
+  margin-left: 0.5in;
+  text-indent: -0.5in;
+  color: #22140d;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 @media (max-width: 900px) {

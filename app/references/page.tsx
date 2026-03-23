@@ -50,15 +50,15 @@ export default function ReferencesPage() {
         </p>
       </section>
 
-      <section className="content-card-grid">
-        <article className="content-card">
-          <h2>Works Cited</h2>
-          <ol className="works-cited-list">
+      <section className="references-section">
+        <div className="works-cited-container">
+          <h2 className="works-cited-heading">Works Cited</h2>
+          <ul className="works-cited-list">
             {worksCited.map((entry) => (
-              <li key={entry}>{renderCitationWithLinks(entry)}</li>
+              <li key={entry} className="citation-entry">{renderCitationWithLinks(entry)}</li>
             ))}
-          </ol>
-        </article>
+          </ul>
+        </div>
       </section>
     </main>
   );
