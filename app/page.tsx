@@ -134,14 +134,14 @@ export default function Home() {
 
       // Mood shift for the environment, with a delayed text transition so it stays
       // dark on bright panels and only brightens once the glass has darkened enough.
-      const mood = Math.pow(progress, 2.5);
+      const mood = progress ** 2.5;
       const textContrastStart = 0.38;
       const textContrastRange = 0.24;
       const textMoodBase = Math.min(
         1,
         Math.max(0, (mood - textContrastStart) / textContrastRange)
       );
-      const textMood = Math.pow(textMoodBase, 0.85);
+      const textMood = textMoodBase ** 0.85;
       const lerp = (a: number, b: number, t: number) => Math.round(a + (b - a) * t);
 
       const bgVal = lerp(255, 3, mood);
