@@ -24,7 +24,7 @@ const panels = [
   {
     label: "IV",
     heading: "The House",
-    body: "Things have changed, the screw pine is gone, so too is the ajoupa. The clove tree and lawn are just as I remember. Now's there's a house in all white, its strange to see a car in the yard...",
+    body: "Things have changed, the screw pine is gone, so too is the ajoupa. The clove tree and lawn are just as I remember. Now there's a house in all white, its strange to see a car in the yard...",
     background: "/Old-white-house.png",
   },
   {
@@ -44,14 +44,14 @@ const panels = [
   {
     label: "VII",
     heading: "The Gaze",
-    body: "The boy then turned to look at me, his grey eyes stared into mine. However his experssion didnt change. \"Hasn't it gone cold all of a sudden...\", he remarked to the girl. She agreed and they both left...",
+    body: "The boy then turned to look at me, his grey eyes stared into mine. However his expression didn't change. \"Hasn't it gone cold all of a sudden...\", he remarked to the girl. She agreed and they both left...",
     background: "/vector-silhouette-boy-white-bac.png",
     shakeIntensity: 1,
   },
   {
     label: "VIII",
     heading: "The Silence",
-    body: "My arms feel back to my side as I watched them run across the gress to the house. That was when I understood...",
+    body: "My arms fell back to my side as I watched them run across the grass to the house. That was when I understood...",
     background: "",
   },
 ];
