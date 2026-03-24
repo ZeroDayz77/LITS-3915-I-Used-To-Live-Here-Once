@@ -2,7 +2,7 @@ const worksCited = [
   "Davidov, Sergei. \"The Art of Parallax Scrolling: Enhancing Visual Storytelling Online.\" Commoninja.com, Common Ninja, 11 Apr. 2024, www.commoninja.com/blog/the-art-of-parallax-scrolling#Introduction-to-Parallax-Scrolling.",
   "Goodbrey, Daniel. \"The Sound of Digital Comics.\" Writing Visual Culture 7, 2015, www.herts.ac.uk/__data/assets/pdf_file/0004/100786/wvc-dc-7-goodbrey.pdf.",
   "Rhys, Jean. \"I Used to Live Here Once.\" Illustration by Stuart Hahn. Caribbean Beat, no. 12, Winter 1994, www.caribbean-beat.com/issue-12/i-used-live-here-once.",
-  "Studios, Jig Reel. \"Camera Movement: Understanding Its Impact on Performance.\" JIG Reel Studios | Actors | Demo Reels | Los Angeles, 26 Mar. 2024, jigreelstudios.com/camera-movement-understanding-its-impact-on-performance/.",
+  "Studios, Jig Reel. \"Camera Movement: Understanding Its Impact on Performance.\" JIG Reel Studios | Actors | Demo Reels | Los Angeles, 26 Mar. 2024, www.jigreelstudios.com/camera-movement-understanding-its-impact-on-performance/.",
 ];
 
 const urlPattern = /(https?:\/\/[^\s]+|www\.[^\s]+)/g;
