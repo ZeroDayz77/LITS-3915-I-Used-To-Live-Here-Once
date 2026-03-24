@@ -297,6 +297,57 @@ body {
 .chevron-left  { left: 0; }
 .chevron-right { right: 0; }
 
+.autoplay-toggle {
+  position: fixed;
+  bottom: 2rem;
+  z-index: 12;
+  border: 1px solid var(--panel-border);
+  background: var(--panel-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 0.65rem 0.85rem;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.autoplay-toggle:hover {
+  transform: translateY(-1px);
+  border-color: var(--color-accent);
+}
+
+.autoplay-toggle-left {
+  left: 1rem;
+}
+
+.restart-panel-button {
+  position: fixed;
+  right: 1rem;
+  bottom: 2rem;
+  z-index: 12;
+  border: 1px solid var(--panel-border);
+  background: var(--panel-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 0.65rem 0.85rem;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.restart-panel-button:hover {
+  transform: translateY(-1px);
+  border-color: var(--color-accent);
+}
+
 .content-page {
   min-height: 100vh;
   padding: 8.5rem 1.4rem 3rem;
@@ -423,7 +474,62 @@ body {
     padding: 0 1.25rem 5.2rem;
   }
 
+  .panel-inner {
+    max-width: 92vw;
+    padding: 1rem 1.1rem;
+  }
+
+  .panel-body {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .chevron {
+    font-size: 2.7rem;
+    padding: 0 0.6rem;
+  }
+
+  .progress-bar {
+    bottom: 1.2rem;
+  }
+
+  .autoplay-toggle,
+  .restart-panel-button {
+    bottom: 4rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.02em;
+    padding: 0.5rem 0.55rem;
+    max-width: 40vw;
+  }
+
+  .autoplay-toggle-left {
+    left: 0.55rem;
+  }
+
+  .restart-panel-button {
+    right: 0.55rem;
+    text-align: right;
+  }
+
   .content-page {
     padding-top: 7.8rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .parallax-panel {
+    align-items: flex-end;
+    padding: 0 0.8rem 5.4rem;
+  }
+
+  .panel-body {
+    font-size: 0.95rem;
+    line-height: 1.58;
+  }
+
+  .autoplay-toggle,
+  .restart-panel-button {
+    bottom: 4.2rem;
+    max-width: 44vw;
   }
 }
