@@ -2,14 +2,27 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import useSound from "use-sound";
-import { Howler } from "howler";
+import { Howl, Howler } from "howler";
 
-const panels = [
+type StoryPanel = {
+  label: string;
+  heading: string;
+  body: string;
+  background: string;
+  bgPosition?: string;
+  shakeIntensity?: number;
+  ambientSound?: string;
+  ambientReverb?: number;
+};
+
+const panels: StoryPanel[] = [
   {
     label: "I",
     heading: "The River",
     body: "I remember these stones, the rounded unsteady stone, the pointed one, the flat one where I could look around, and the dangerous one, slippery even when it looked dry...",
     background: "/Stepping_stones,_Hebden,_bench.jpg",
+    ambientSound: "/sounds/river-sound-effect.mp3",
+    ambientReverb: 0.15,
   },
   {
     label: "II",
@@ -27,8 +40,7 @@ const panels = [
     label: "IV",
     heading: "The House",
     body: "Things have changed, the screw pine is gone, so too is the ajoupa. The clove tree and lawn are just as I remember. Now there's a house in all white, its strange to see a car in the yard...",
-    background: "/Old-white-house.png",
-  },
+    background: "/Old-white-house.png",  },
   {
     label: "V",
     heading: "The Children",
@@ -97,12 +109,19 @@ export default function Home() {
   const shakeRafRef = useRef<number | null>(null);
   const idleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const autoPlayTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const ambientHowlRef = useRef<Howl | null>(null);
+  const activeAmbientSrcRef = useRef<string | null>(null);
+  const fadingAmbientHowlRef = useRef<Howl | null>(null);
+  const fadingAmbientTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [activePanel, setActivePanel] = useState(0);
   const [showIntro, setShowIntro] = useState(true);
   const [autoPlayEnabled, setAutoPlayEnabled] = useState(true);
   const [isAutoPlaying, setIsAutoPlaying] = useState(false);
   const [isHouseCrossfadeActive, setIsHouseCrossfadeActive] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [isAudioUnlocked, setIsAudioUnlocked] = useState(false);
+  const [audioUnlockNonce, setAudioUnlockNonce] = useState(0);
 
   const reverbNodesRef = useRef<{
     dryGain: GainNode;
@@ -185,6 +204,50 @@ export default function Home() {
     reverbNodesRef.current.wetGain.gain.linearRampToValueAtTime(nextWet, now + rampTime);
     reverbNodesRef.current.dryGain.gain.linearRampToValueAtTime(nextDry, now + rampTime);
   }, [setupReverbRouting]);
+
+  const clamp01 = useCallback((value: number) => Math.min(1, Math.max(0, value)), []);
+  const AMBIENT_CROSSFADE_MS = 900;
+  const AMBIENT_FIXED_VOLUME = 0.01;
+
+  const stopFadingAmbientSound = useCallback(() => {
+    if (fadingAmbientTimeoutRef.current) {
+      clearTimeout(fadingAmbientTimeoutRef.current);
+      fadingAmbientTimeoutRef.current = null;
+    }
+
+    if (!fadingAmbientHowlRef.current) return;
+    fadingAmbientHowlRef.current.stop();
+    fadingAmbientHowlRef.current.unload();
+    fadingAmbientHowlRef.current = null;
+  }, []);
+
+  const queueAmbientFadeOutAndDispose = useCallback(
+    (howl: Howl) => {
+      stopFadingAmbientSound();
+
+      const startVolume = howl.volume();
+      howl.fade(startVolume, 0, AMBIENT_CROSSFADE_MS);
+      fadingAmbientHowlRef.current = howl;
+      fadingAmbientTimeoutRef.current = setTimeout(() => {
+        if (!fadingAmbientHowlRef.current) return;
+        fadingAmbientHowlRef.current.stop();
+        fadingAmbientHowlRef.current.unload();
+        fadingAmbientHowlRef.current = null;
+        fadingAmbientTimeoutRef.current = null;
+      }, AMBIENT_CROSSFADE_MS + 60);
+    },
+    [stopFadingAmbientSound]
+  );
+
+  const stopAmbientSound = useCallback(() => {
+    if (!ambientHowlRef.current) return;
+
+    ambientHowlRef.current.stop();
+    ambientHowlRef.current.unload();
+    ambientHowlRef.current = null;
+    activeAmbientSrcRef.current = null;
+    stopFadingAmbientSound();
+  }, [stopFadingAmbientSound]);
 
   const IDLE_TIMEOUT_MS = 1000;
   const AUTO_ADVANCE_MS = 7000;
@@ -392,6 +455,10 @@ export default function Home() {
     startAutoPlay(true);
   }, [clearIdleTimer, isAutoPlaying, startAutoPlay, stopAutoPlay]);
 
+  const handleMuteToggle = useCallback(() => {
+    setIsMuted((prev) => !prev);
+  }, []);
+
   const handleTreeHitboxClick = useCallback(
     (panelIndex: number) => {
       if (panelIndex === 4) {
@@ -453,6 +520,126 @@ export default function Home() {
       clearIdleTimer();
     };
   }, [autoPlayEnabled, clearIdleTimer, scheduleIdleAutoplay, showIntro, stopAutoPlay]);
+
+  useEffect(() => {
+    Howler.mute(isMuted);
+  }, [isMuted]);
+
+  useEffect(() => {
+    if (showIntro) return;
+
+    if (Howler.ctx?.state !== "suspended") {
+      setIsAudioUnlocked(true);
+    }
+
+    const unlockAudio = () => {
+      if (Howler.ctx?.state === "suspended") {
+        void Howler.ctx.resume().then(() => {
+          setIsAudioUnlocked(true);
+        });
+      } else {
+        setIsAudioUnlocked(true);
+      }
+
+      // Force ambient effect to retry playback after the browser unlock gesture.
+      setAudioUnlockNonce((prev) => prev + 1);
+    };
+
+    window.addEventListener("pointerdown", unlockAudio, { passive: true });
+    window.addEventListener("touchstart", unlockAudio, { passive: true });
+    window.addEventListener("keydown", unlockAudio);
+
+    return () => {
+      window.removeEventListener("pointerdown", unlockAudio);
+      window.removeEventListener("touchstart", unlockAudio);
+      window.removeEventListener("keydown", unlockAudio);
+    };
+  }, [showIntro]);
+
+  useEffect(() => {
+    if (showIntro) return;
+    void audioUnlockNonce;
+
+    const currentAmbient = ambientHowlRef.current;
+    if (!currentAmbient || currentAmbient.playing()) return;
+
+    if (Howler.ctx?.state === "suspended") {
+      void Howler.ctx.resume();
+    }
+
+    currentAmbient.play();
+  }, [audioUnlockNonce, showIntro]);
+
+  useEffect(() => {
+    if (showIntro) {
+      stopAmbientSound();
+      return;
+    }
+
+    const panel = panels[activePanel];
+    const ambientSrc = panel.ambientSound;
+    const ambientVolume = AMBIENT_FIXED_VOLUME;
+    const ambientReverb = clamp01(panel.ambientReverb ?? 0);
+    const currentAmbient = ambientHowlRef.current;
+    const currentAmbientSrc = activeAmbientSrcRef.current;
+
+    setReverbMix(ambientReverb, 1);
+
+    if (!ambientSrc) {
+      if (!currentAmbient) return;
+
+      queueAmbientFadeOutAndDispose(currentAmbient);
+
+      ambientHowlRef.current = null;
+      activeAmbientSrcRef.current = null;
+      return;
+    }
+
+    if (currentAmbient && currentAmbientSrc === ambientSrc) {
+      currentAmbient.fade(currentAmbient.volume(), ambientVolume, 260);
+      if (!currentAmbient.playing()) {
+        currentAmbient.play();
+      }
+      return;
+    }
+
+    stopFadingAmbientSound();
+
+    const incomingHowl = new Howl({
+      src: [ambientSrc],
+      loop: true,
+      volume: 0,
+      html5: false,
+      onplayerror: () => {
+        incomingHowl.once("unlock", () => {
+          incomingHowl.play();
+          incomingHowl.fade(0, ambientVolume, AMBIENT_CROSSFADE_MS);
+        });
+      },
+    });
+
+    if (Howler.ctx?.state === "suspended") {
+      void Howler.ctx.resume();
+    }
+
+    incomingHowl.play();
+    incomingHowl.fade(0, ambientVolume, AMBIENT_CROSSFADE_MS);
+
+    if (currentAmbient) {
+      queueAmbientFadeOutAndDispose(currentAmbient);
+    }
+
+    ambientHowlRef.current = incomingHowl;
+    activeAmbientSrcRef.current = ambientSrc;
+  }, [
+    activePanel,
+    clamp01,
+    queueAmbientFadeOutAndDispose,
+    setReverbMix,
+    showIntro,
+    stopAmbientSound,
+    stopFadingAmbientSound,
+  ]);
 
   useEffect(() => {
     let snapTimer: ReturnType<typeof setTimeout> | null = null;
@@ -564,14 +751,16 @@ export default function Home() {
     return () => {
       clearIdleTimer();
       clearAutoPlayTimer();
+      stopAmbientSound();
     };
-  }, [clearAutoPlayTimer, clearIdleTimer]);
+  }, [clearAutoPlayTimer, clearIdleTimer, stopAmbientSound]);
 
   return (
     <main>
       {showIntro && (
         <div className="intro-overlay" aria-hidden="true">
           <h1 className="intro-title">I Used To Live Here Once</h1>
+          {!isAudioUnlocked && <p className="intro-sound-hint">Tap To Enable Sound</p>}
         </div>
       )}
 
@@ -647,6 +836,16 @@ export default function Home() {
             />
           ))}
         </nav>
+
+        <button
+          type="button"
+          className="autoplay-toggle autoplay-toggle-left mute-toggle-left"
+          onClick={handleMuteToggle}
+          aria-label={isMuted ? "Unmute sound" : "Mute sound"}
+          data-manual-control="true"
+        >
+          {isMuted ? "Unmute Sound" : "Mute Sound"}
+        </button>
 
         <button
           type="button"

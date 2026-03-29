@@ -98,6 +98,35 @@ body {
   animation: introTitleFade 3s ease forwards;
 }
 
+.intro-sound-hint {
+  position: absolute;
+  bottom: clamp(1.4rem, 4vh, 2.4rem);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(26, 26, 26, 0.72);
+  opacity: 0;
+  animation: introHintFade 3s ease forwards;
+}
+
+@keyframes introHintFade {
+  0% {
+    opacity: 0;
+  }
+  22% {
+    opacity: 1;
+  }
+  72% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 .story-shell {
   opacity: 0;
   transition: opacity 700ms ease;
@@ -386,6 +415,10 @@ body {
 
 .autoplay-toggle-left {
   left: 1rem;
+}
+
+.mute-toggle-left {
+  bottom: 5.1rem;
 }
 
 .restart-panel-button {
