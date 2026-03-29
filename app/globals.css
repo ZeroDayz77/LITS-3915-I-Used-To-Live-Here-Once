@@ -104,7 +104,7 @@ body {
 
 .intro-sound-hint {
   position: absolute;
-  bottom: clamp(1.4rem, 4vh, 2.4rem);
+  bottom: clamp(2.2rem, 6vh, 3.1rem);
   left: 50%;
   transform: translateX(-50%);
   font-family: var(--font-sans);
@@ -112,6 +112,20 @@ body {
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: rgba(26, 26, 26, 0.72);
+  opacity: 0;
+  animation: introHintFade 3s ease forwards;
+}
+
+.intro-headphone-hint {
+  position: absolute;
+  bottom: clamp(1.2rem, 3.8vh, 2rem);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  color: rgba(26, 26, 26, 0.62);
   opacity: 0;
   animation: introHintFade 3s ease forwards;
 }

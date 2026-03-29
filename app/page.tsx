@@ -29,24 +29,33 @@ const panels: StoryPanel[] = [
     heading: "The Road",
     body: "The road is wider now, it looks carelessly done. Yet even with these felled trees and trampled bushes, walking here always makes me happy...",
     background: "/road.png",
+    ambientSound: "/sounds/old-road-with-felled-trees.mp3",
+    ambientReverb: 0.15,
   },
   {
     label: "III",
     heading: "The Sky",
     body: "I don't remember the sky looking this way, I can't think of any other word to describe it other than... Glassy...",
     background: "/sky.png",
+    ambientSound: "/sounds/light-breeze-glassy-sky.mp3",
+    ambientReverb: 0.15,
   },
   {
     label: "IV",
     heading: "The House",
     body: "Things have changed, the screw pine is gone, so too is the ajoupa. The clove tree and lawn are just as I remember. Now there's a house in all white, its strange to see a car in the yard...",
-    background: "/Old-white-house.png",  },
+    background: "/Old-white-house.png",
+    ambientSound: "/sounds/the-house.mp3",
+    ambientReverb: 0.15,
+  },
   {
     label: "V",
     heading: "The Children",
     body: "There were two children under the big mango tree, a boy and a little girl. I tried calling out to them, but they didn't respond. I started to walk towards them...",
     background: "/mango-tree-raw-green-mangoes-han.png",
     bgPosition: "bottom center",
+    ambientSound: "/sounds/children-by-the-mango-tree.mp3",
+    ambientReverb: 0.15,
   },
   {
     label: "VI",
@@ -54,6 +63,8 @@ const panels: StoryPanel[] = [
     body: '"I used to live here once..." I said as I got closer, still to no response. I moved in closer, instinctively I tried to reach out to them...',
     background: "/mango-tree-raw-green-mangoes-reaching-out.png",
     bgPosition: "bottom center",
+    ambientSound: "/sounds/children-by-the-mango-tree.mp3",
+    ambientReverb: 0.30,
   },
   {
     label: "VII",
@@ -61,12 +72,16 @@ const panels: StoryPanel[] = [
     body: "The boy then turned to look at me, his grey eyes stared into mine. However his expression didn't change. \"Hasn't it gone cold all of a sudden...\", he remarked to the girl. She agreed and they both left...",
     background: "/vector-silhouette-boy-white-bac.png",
     shakeIntensity: 1,
+    ambientSound: "/sounds/eerie-background.mp3",
+    ambientReverb: 0.15,
   },
   {
     label: "VIII",
     heading: "The Silence",
     body: "My arms fell back to my side as I watched them run across the grass to the house. That was when I understood...",
     background: "",
+    ambientSound: "/sounds/silence.mp3",
+    ambientReverb: 0.15,
   },
 ];
 
@@ -760,7 +775,12 @@ export default function Home() {
       {showIntro && (
         <div className="intro-overlay" aria-hidden="true">
           <h1 className="intro-title">I Used To Live Here Once</h1>
-          {!isAudioUnlocked && <p className="intro-sound-hint">Tap To Enable Sound</p>}
+          {!isAudioUnlocked && (
+            <>
+              <p className="intro-sound-hint">Tap To Enable Sound</p>
+              <p className="intro-headphone-hint">Headphones recommended for the best experience</p>
+            </>
+          )}
         </div>
       )}
 
