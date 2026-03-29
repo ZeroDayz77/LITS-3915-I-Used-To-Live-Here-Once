@@ -11,6 +11,7 @@ const worksCited = [
   "Relaxing sounds. \"Footsteps grass sound effect.\" YouTube, 2026, https://www.youtube.com/watch?v=HgidfHqfGcg.",
   "Rhys, Jean. \"I Used to Live Here Once.\" Illustration by Stuart Hahn. Caribbean Beat, no. 12, Winter 1994, www.caribbean-beat.com/issue-12/i-used-live-here-once.",
   "Sicilia, Maria, et al. \"EFFECTS of INTERACTIVITY in a WEB SITE: The Moderating Effect of Need for Cognition.\" Journal of Advertising, vol. 34, no. 3, Nov. 2005, pp. 31-44, https://doi.org/10.1080/00913367.2005.10639202.",
+  "Sonic Sounds. \"Family Gathering Sounds | Comforting Sound for Relaxation, Company and Loneliness.\" YouTube, 24 Oct. 2022, www.youtube.com/watch?v=irndVR28SHY.",
   "Sound Central. \"Riser - Sound Effect (Free).\" YouTube, 2026, https://www.youtube.com/watch?v=Am4wYTiHHx8&pp=ygUdc3VkZGVubHkgcmVhbGl6ZSBzb3VuZCBlZmZlY3Q%3D.",
   "Sound Library. \"Shuffle around House - Sound Effect for Editing.\" YouTube, 17 July 2020, www.youtube.com/watch?v=NV9vOf76XeY.",
   "Studios, Jig Reel. \"Camera Movement: Understanding Its Impact on Performance.\" JIG Reel Studios | Actors | Demo Reels | Los Angeles, 26 Mar. 2024, www.jigreelstudios.com/camera-movement-understanding-its-impact-on-performance/.",

@@ -243,7 +243,8 @@ export default function Home() {
 
   const clamp01 = useCallback((value: number) => Math.min(1, Math.max(0, value)), []);
   const AMBIENT_CROSSFADE_MS = 900;
-  const AMBIENT_FIXED_VOLUME = 0.01;
+  const AMBIENT_FIXED_VOLUME = 0.013;
+  const PANEL_FOUR_INTERACTION_SOUND = "/sounds/the-ajoupa.mp3";
 
   const stopFadingAmbientSound = useCallback(() => {
     if (fadingAmbientTimeoutRef.current) {
@@ -618,7 +619,10 @@ export default function Home() {
     }
 
     const panel = panels[activePanel];
-    const ambientSrc = panel.ambientSound;
+    const usePanelFourInteractionSound = activePanel === 3 && isHouseCrossfadeActive;
+    const ambientSrc = usePanelFourInteractionSound
+      ? PANEL_FOUR_INTERACTION_SOUND
+      : panel.ambientSound;
     const ambientVolume = AMBIENT_FIXED_VOLUME;
     const ambientReverb = clamp01(panel.ambientReverb ?? 0);
     const currentAmbient = ambientHowlRef.current;
@@ -675,6 +679,7 @@ export default function Home() {
   }, [
     activePanel,
     clamp01,
+    isHouseCrossfadeActive,
     queueAmbientFadeOutAndDispose,
     setReverbMix,
     showIntro,
