@@ -1,8 +1,19 @@
 const worksCited = [
+  "Audio Wind. \"Winter Morning Ambience Sound Effect | Copyright Free Nature Sounds.\" YouTube, 2026, https://www.youtube.com/watch?v=Lkjhuss8byo.",
   "Davidov, Sergei. \"The Art of Parallax Scrolling: Enhancing Visual Storytelling Online.\" Commoninja.com, Common Ninja, 11 Apr. 2024, www.commoninja.com/blog/the-art-of-parallax-scrolling#Introduction-to-Parallax-Scrolling.",
+  "Devendran N. \"River Sound Effect.\" YouTube, 11 Feb. 2021, www.youtube.com/watch?v=iJQ2m99-ot0.",
+  "Free Audio Zone. \"Dark Ambient Sound Effect - Eerie Background.\" YouTube, 2026, https://www.youtube.com/watch?v=g0yQmVGla5U.",
+  "Free Copyright Free Sounds - For Video Contents. \"🎵 No Copyright Free Creepy Eerie Scary Whisper Sound Effect.\" YouTube, 31 Mar. 2019, www.youtube.com/watch?v=R72rCF-fsyk.",
   "Goodbrey, Daniel. \"The Sound of Digital Comics.\" Writing Visual Culture 7, 2015, www.herts.ac.uk/__data/assets/pdf_file/0004/100786/wvc-dc-7-goodbrey.pdf.",
+  "Jason Low. \"Sound Effects - Kids Laughing.\" YouTube, www.youtube.com/watch?v=NMPGKM9zg0M.",
+  "nathanolson. \"Light Breeze Field Sound FX.\" YouTube, 10 Sept. 2015, www.youtube.com/watch?v=490z2QH6v5o.",
+  "poul bautist. \"Silence Sound Effect (Empty Room).\" YouTube, www.youtube.com/watch?v=VrfyB2gMAUg.",
+  "Relaxing sounds. \"Footsteps grass sound effect.\" YouTube, 2026, https://www.youtube.com/watch?v=HgidfHqfGcg.",
   "Rhys, Jean. \"I Used to Live Here Once.\" Illustration by Stuart Hahn. Caribbean Beat, no. 12, Winter 1994, www.caribbean-beat.com/issue-12/i-used-live-here-once.",
-  "Studios, Jig Reel. \"Camera Movement: Understanding Its Impact on Performance.\" JIG Reel Studios | Actors | Demo Reels | Los Angeles, 26 Mar. 2024, www.jigreelstudios.com/camera-movement-understanding-its-impact-on-performance/.",
+  "Sicilia, Maria, et al. \"EFFECTS of INTERACTIVITY in a WEB SITE: The Moderating Effect of Need for Cognition.\" Journal of Advertising, vol. 34, no. 3, Nov. 2005, pp. 31–44, https://doi.org/10.1080/00913367.2005.10639202.",
+  "Sound Central. \"Riser - Sound Effect (Free).\" YouTube, 2026, https://www.youtube.com/watch?v=Am4wYTiHHx8&pp=ygUdc3VkZGVubHkgcmVhbGl6ZSBzb3VuZCBlZmZlY3Q%3D.",
+  "Sound Library. \"Shuffle around House - Sound Effect for Editing.\" YouTube, 17 July 2020, www.youtube.com/watch?v=NV9vOf76XeY.",
+  "Studios, Jig Reel. \"Camera Movement: Understanding Its Impact on Performance.\" JIG Reel Studios | Actors | Demo Reels | Los Angeles, 26 Mar. 2024, jigreelstudios.com/camera-movement-understanding-its-impact-on-performance/.",
 ];
 
 const urlPattern = /(https?:\/\/[^\s]+|www\.[^\s]+)/g;
