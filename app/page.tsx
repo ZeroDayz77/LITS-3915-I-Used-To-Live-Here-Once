@@ -103,6 +103,27 @@ const shakeStepDurationMs = (intensity: number) => {
   return Math.round(420 - t * 320);
 };
 
+const InteractionIcon = () => (
+  <span className="interaction-icon" aria-hidden="true">
+    <svg
+      className="interaction-icon-svg"
+      viewBox="0 0 24 24"
+      role="img"
+      focusable="false"
+      aria-hidden="true"
+    >
+      <path
+        d="M4 10.2L12 4l8 6.2V20h-5.2v-6.1H9.2V20H4v-9.8Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  </span>
+);
+
 export default function Home() {
   const trackRef = useRef<HTMLDivElement>(null);
   const bgRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -494,6 +515,11 @@ export default function Home() {
     setIsHouseCrossfadeActive(true);
   }, []);
 
+  const handleHouseTap = useCallback(() => {
+    // Touch devices do not have hover, so tapping should explicitly reveal panel 4's overlay.
+    setIsHouseCrossfadeActive(true);
+  }, []);
+
   const handleHouseHoverLeave = useCallback(() => {
     setIsHouseCrossfadeActive(false);
   }, []);
@@ -774,7 +800,18 @@ export default function Home() {
     <main>
       {showIntro && (
         <div className="intro-overlay" aria-hidden="true">
-          <h1 className="intro-title">I Used To Live Here Once</h1>
+          <div className="intro-content">
+            <h1 className="intro-title">I Used To Live Here Once</h1>
+            <div className="intro-interaction-hint">
+              <p className="intro-interaction-hint-text">
+                When you see this icon on a panel, you can interact with some parts of the image by clicking/tapping or
+                hovering.
+              </p>
+              <div className="intro-interaction-hint-icon-row">
+                <InteractionIcon />
+              </div>
+            </div>
+          </div>
           {!isAudioUnlocked && (
             <>
               <p className="intro-sound-hint">Tap To Enable Sound</p>
@@ -816,6 +853,7 @@ export default function Home() {
                     <button
                       type="button"
                       className="house-hitbox"
+                      onClick={handleHouseTap}
                       onPointerEnter={handleHouseHoverEnter}
                       onPointerLeave={handleHouseHoverLeave}
                       onFocus={handleHouseHoverEnter}
@@ -833,10 +871,17 @@ export default function Home() {
                       data-manual-control="true"
                     />
                   )}
-                  <div className="panel-inner">
-                    <p className="panel-label">{panel.label}</p>
-                    <h2 className="panel-heading">{panel.heading}</h2>
-                    <p className="panel-body">{panel.body}</p>
+                  <div className="panel-card-wrap">
+                    {(panelIndex === 3 || panelIndex === 4 || panelIndex === 5) && (
+                      <div className="panel-interaction-marker" aria-hidden="true">
+                        <InteractionIcon />
+                      </div>
+                    )}
+                    <div className="panel-inner">
+                      <p className="panel-label">{panel.label}</p>
+                      <h2 className="panel-heading">{panel.heading}</h2>
+                      <p className="panel-body">{panel.body}</p>
+                    </div>
                   </div>
                 </section>
               ))}
