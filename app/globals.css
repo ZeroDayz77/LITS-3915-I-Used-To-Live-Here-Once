@@ -6,6 +6,10 @@
   padding: 0;
 }
 
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 :root {
   --color-bg: #ffffff;
   --color-text: #1a1a1a;
@@ -598,11 +602,15 @@ body {
 
   .autoplay-toggle,
   .restart-panel-button {
-    bottom: 4rem;
+    bottom: 12.8rem;
     font-size: 0.68rem;
     letter-spacing: 0.02em;
     padding: 0.5rem 0.55rem;
     max-width: 40vw;
+  }
+
+  .mute-toggle-left {
+    bottom: 15.7rem;
   }
 
   .autoplay-toggle-left {
@@ -632,7 +640,11 @@ body {
 
   .autoplay-toggle,
   .restart-panel-button {
-    bottom: 4.2rem;
+    bottom: 13.4rem;
     max-width: 44vw;
+  }
+
+  .mute-toggle-left {
+    bottom: 16.3rem;
   }
 }
