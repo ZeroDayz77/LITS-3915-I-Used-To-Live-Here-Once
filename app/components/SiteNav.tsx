@@ -10,7 +10,7 @@ const navLinks = [
   { href: "/characters", label: "Characters" },
   { href: "/storyline", label: "Storyline" },
   { href: "/themes", label: "Themes" },
-  { href: "/references", label: "References" },
+  { href: "/references", label: "Works Cited" },
 ];
 
 export default function SiteNav() {
