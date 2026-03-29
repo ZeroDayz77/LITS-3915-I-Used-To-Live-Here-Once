@@ -102,6 +102,7 @@ export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
   const [autoPlayEnabled, setAutoPlayEnabled] = useState(true);
   const [isAutoPlaying, setIsAutoPlaying] = useState(false);
+  const [isHouseCrossfadeActive, setIsHouseCrossfadeActive] = useState(false);
 
   const reverbNodesRef = useRef<{
     dryGain: GainNode;
@@ -407,6 +408,14 @@ export default function Home() {
     [playTreeSoundLoud, playTreeSoundSoft, setReverbMix]
   );
 
+  const handleHouseHoverEnter = useCallback(() => {
+    setIsHouseCrossfadeActive(true);
+  }, []);
+
+  const handleHouseHoverLeave = useCallback(() => {
+    setIsHouseCrossfadeActive(false);
+  }, []);
+
   useEffect(() => {
     if (showIntro) {
       clearIdleTimer();
@@ -584,11 +593,28 @@ export default function Home() {
                   }}
                 />
               ))}
+              <div
+                className={`house-crossfade-layer${isHouseCrossfadeActive && activePanel === 3 ? " active" : ""}`}
+                style={{ backgroundImage: "url('/ajoupa-house.png')" }}
+                aria-hidden="true"
+              />
             </div>
 
             <div className="parallax-track" ref={trackRef}>
               {panels.map((panel, panelIndex) => (
                 <section key={panel.label} className="parallax-panel">
+                  {panelIndex === 3 && (
+                    <button
+                      type="button"
+                      className="house-hitbox"
+                      onPointerEnter={handleHouseHoverEnter}
+                      onPointerLeave={handleHouseHoverLeave}
+                      onFocus={handleHouseHoverEnter}
+                      onBlur={handleHouseHoverLeave}
+                      aria-label="Reveal the ajoupa"
+                      data-manual-control="true"
+                    />
+                  )}
                   {(panelIndex === 4 || panelIndex === 5) && (
                     <button
                       type="button"

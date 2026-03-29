@@ -203,6 +203,50 @@ body {
   padding: 0 4rem 6rem;
 }
 
+.house-crossfade-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 950ms ease, visibility 0s linear 950ms;
+  -webkit-mask-image:
+    linear-gradient(to right,  transparent 0%, black 12%, black 88%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+  mask-image:
+    linear-gradient(to right,  transparent 0%, black 12%, black 88%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+  -webkit-mask-composite: destination-in;
+  mask-composite: intersect;
+}
+
+.house-crossfade-layer.active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 950ms ease, visibility 0s linear 0s;
+}
+
+.house-hitbox {
+  position: absolute;
+  top: 30%;
+  right: 18%;
+  transform: translate(0, -50%);
+  width: clamp(230px, 32vw, 430px);
+  height: clamp(170px, 24vw, 320px);
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.house-hitbox:focus-visible {
+  outline: 2px dashed rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+}
+
 .tree-hitbox {
   position: absolute;
   top: 56%;
