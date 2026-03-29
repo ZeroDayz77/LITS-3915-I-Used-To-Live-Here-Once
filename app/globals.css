@@ -107,6 +107,9 @@ body {
   bottom: clamp(2.2rem, 6vh, 3.1rem);
   left: 50%;
   transform: translateX(-50%);
+  width: min(92vw, 520px);
+  text-align: center;
+  line-height: 1.35;
   font-family: var(--font-sans);
   font-size: 0.85rem;
   letter-spacing: 0.05em;
@@ -121,6 +124,9 @@ body {
   bottom: clamp(1.2rem, 3.8vh, 2rem);
   left: 50%;
   transform: translateX(-50%);
+  width: min(92vw, 520px);
+  text-align: center;
+  line-height: 1.35;
   font-family: var(--font-sans);
   font-size: 0.78rem;
   letter-spacing: 0.045em;
@@ -642,6 +648,18 @@ body {
 }
 
 @media (max-width: 520px) {
+  .intro-sound-hint {
+    bottom: clamp(5.1rem, 10vh, 6.4rem);
+    font-size: 0.74rem;
+    letter-spacing: 0.04em;
+  }
+
+  .intro-headphone-hint {
+    bottom: clamp(2.5rem, 5.8vh, 3.5rem);
+    font-size: 0.68rem;
+    letter-spacing: 0.035em;
+  }
+
   .parallax-panel {
     align-items: flex-end;
     padding: 0 0.8rem 5.4rem;
