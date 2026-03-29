@@ -1,6 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import useSound from "use-sound";
+import { Howler } from "howler";
 
 const panels = [
   {
@@ -100,6 +102,88 @@ export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
   const [autoPlayEnabled, setAutoPlayEnabled] = useState(true);
   const [isAutoPlaying, setIsAutoPlaying] = useState(false);
+
+  const reverbNodesRef = useRef<{
+    dryGain: GainNode;
+    wetGain: GainNode;
+    initialized: boolean;
+  } | null>(null);
+
+  const [playTreeSoundSoft] = useSound("/sounds/woman-saying-hey.mp3", {
+    volume: 0.28,
+    interrupt: true,
+  });
+
+  const [playTreeSoundLoud] = useSound("/sounds/woman-saying-hey.mp3", {
+    volume: 0.72,
+    interrupt: true,
+  });
+
+  const setupReverbRouting = useCallback(() => {
+    if (typeof window === "undefined") return;
+    if (reverbNodesRef.current?.initialized) return;
+
+    const ctx = Howler.ctx;
+    const masterGain = Howler.masterGain;
+    if (!ctx || !masterGain) return;
+
+    const createImpulse = (durationSec: number, decay: number) => {
+      const sampleRate = ctx.sampleRate;
+      const length = Math.max(1, Math.floor(sampleRate * durationSec));
+      const impulse = ctx.createBuffer(2, length, sampleRate);
+
+      for (let channel = 0; channel < impulse.numberOfChannels; channel++) {
+        const channelData = impulse.getChannelData(channel);
+        for (let i = 0; i < length; i++) {
+          const t = i / length;
+          const fade = (1 - t) ** decay;
+          channelData[i] = (Math.random() * 2 - 1) * fade;
+        }
+      }
+
+      return impulse;
+    };
+
+    const dryGain = ctx.createGain();
+    const wetGain = ctx.createGain();
+    const convolver = ctx.createConvolver();
+
+    convolver.buffer = createImpulse(1.25, 2.5);
+    dryGain.gain.value = 1;
+    wetGain.gain.value = 0;
+
+    masterGain.disconnect();
+    masterGain.connect(dryGain);
+    masterGain.connect(convolver);
+    convolver.connect(wetGain);
+    dryGain.connect(ctx.destination);
+    wetGain.connect(ctx.destination);
+
+    reverbNodesRef.current = {
+      dryGain,
+      wetGain,
+      initialized: true,
+    };
+  }, []);
+
+  const setReverbMix = useCallback((wet: number, dry = 1) => {
+    setupReverbRouting();
+    if (!reverbNodesRef.current) return;
+
+    const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
+    const now = Howler.ctx?.currentTime ?? 0;
+    const rampTime = 0.05;
+
+    const nextWet = clamp01(wet);
+    const nextDry = clamp01(dry);
+
+    reverbNodesRef.current.wetGain.gain.cancelScheduledValues(now);
+    reverbNodesRef.current.dryGain.gain.cancelScheduledValues(now);
+    reverbNodesRef.current.wetGain.gain.setValueAtTime(reverbNodesRef.current.wetGain.gain.value, now);
+    reverbNodesRef.current.dryGain.gain.setValueAtTime(reverbNodesRef.current.dryGain.gain.value, now);
+    reverbNodesRef.current.wetGain.gain.linearRampToValueAtTime(nextWet, now + rampTime);
+    reverbNodesRef.current.dryGain.gain.linearRampToValueAtTime(nextDry, now + rampTime);
+  }, [setupReverbRouting]);
 
   const IDLE_TIMEOUT_MS = 1000;
   const AUTO_ADVANCE_MS = 7000;
@@ -307,6 +391,22 @@ export default function Home() {
     startAutoPlay(true);
   }, [clearIdleTimer, isAutoPlaying, startAutoPlay, stopAutoPlay]);
 
+  const handleTreeHitboxClick = useCallback(
+    (panelIndex: number) => {
+      if (panelIndex === 4) {
+        setReverbMix(0.22, 0.95);
+        playTreeSoundSoft();
+        return;
+      }
+
+      if (panelIndex === 5) {
+        setReverbMix(0.5, 0.85);
+        playTreeSoundLoud();
+      }
+    },
+    [playTreeSoundLoud, playTreeSoundSoft, setReverbMix]
+  );
+
   useEffect(() => {
     if (showIntro) {
       clearIdleTimer();
@@ -487,8 +587,17 @@ export default function Home() {
             </div>
 
             <div className="parallax-track" ref={trackRef}>
-              {panels.map((panel) => (
+              {panels.map((panel, panelIndex) => (
                 <section key={panel.label} className="parallax-panel">
+                  {(panelIndex === 4 || panelIndex === 5) && (
+                    <button
+                      type="button"
+                      className="tree-hitbox"
+                      onClick={() => handleTreeHitboxClick(panelIndex)}
+                      aria-label={panelIndex === 4 ? "Play soft tree sound" : "Play loud tree sound"}
+                      data-manual-control="true"
+                    />
+                  )}
                   <div className="panel-inner">
                     <p className="panel-label">{panel.label}</p>
                     <h2 className="panel-heading">{panel.heading}</h2>
