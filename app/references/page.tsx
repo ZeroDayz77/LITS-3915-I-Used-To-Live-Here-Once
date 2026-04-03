@@ -1,6 +1,7 @@
 const worksCited = [
   "Audio Wind. \"Winter Morning Ambience Sound Effect | Copyright Free Nature Sounds.\" YouTube, 2026, https://www.youtube.com/watch?v=Lkjhuss8byo.",
   "Davidov, Sergei. \"The Art of Parallax Scrolling: Enhancing Visual Storytelling Online.\" Commoninja.com, Common Ninja, 11 Apr. 2024, www.commoninja.com/blog/the-art-of-parallax-scrolling#Introduction-to-Parallax-Scrolling.",
+  "Denisova, Alena, and Paul Cairns. \"First Person vs. Third Person Perspective in Digital Games.\" Proceedings of the 33rd Annual ACM Conference on Human Factors in Computing Systems - CHI '15, 2015, https://doi.org/10.1145/2702123.2702256.",
   "Devendran N. \"River Sound Effect.\" YouTube, 11 Feb. 2021, www.youtube.com/watch?v=iJQ2m99-ot0.",
   "Free Audio Zone. \"Dark Ambient Sound Effect - Eerie Background.\" YouTube, 2026, https://www.youtube.com/watch?v=g0yQmVGla5U.",
   "Free Copyright Free Sounds - For Video Contents. \"🎵 No Copyright Free Creepy Eerie Scary Whisper Sound Effect.\" YouTube, 31 Mar. 2019, www.youtube.com/watch?v=R72rCF-fsyk.",
