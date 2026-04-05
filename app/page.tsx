@@ -175,6 +175,25 @@ export default function Home() {
     interrupt: true,
   });
 
+  const [playPageTurnOne] = useSound("/sounds/page-turn-1.mp3", {
+    volume: 0.10,
+    interrupt: true,
+  });
+
+  const [playPageTurnTwo] = useSound("/sounds/page-turn-2.mp3", {
+    volume: 0.10,
+    interrupt: true,
+  });
+
+  const playRandomPageTurnSound = useCallback(() => {
+    if (Math.random() < 0.5) {
+      playPageTurnOne();
+      return;
+    }
+
+    playPageTurnTwo();
+  }, [playPageTurnOne, playPageTurnTwo]);
+
   const setupReverbRouting = useCallback(() => {
     if (typeof window === "undefined") return;
     if (reverbNodesRef.current?.initialized) return;
@@ -456,10 +475,11 @@ export default function Home() {
           return;
         }
 
+        playRandomPageTurnSound();
         scrollToPanel(currentIndex + 1);
       }, AUTO_ADVANCE_MS);
     },
-    [autoPlayEnabled, clearAutoPlayTimer, scrollToPanel, showIntro, stopAutoPlay]
+    [autoPlayEnabled, clearAutoPlayTimer, playRandomPageTurnSound, scrollToPanel, showIntro, stopAutoPlay]
   );
 
   const scheduleIdleAutoplay = useCallback(() => {
@@ -475,9 +495,14 @@ export default function Home() {
     (index: number) => {
       clearIdleTimer();
       stopAutoPlay(true);
+
+      if (index !== activePanel) {
+        playRandomPageTurnSound();
+      }
+
       scrollToPanel(index);
     },
-    [clearIdleTimer, scrollToPanel, stopAutoPlay]
+    [activePanel, clearIdleTimer, playRandomPageTurnSound, scrollToPanel, stopAutoPlay]
   );
 
   const handleAutoPlayButtonClick = useCallback(() => {
