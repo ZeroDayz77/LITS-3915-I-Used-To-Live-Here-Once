@@ -2,37 +2,60 @@ export default function SummaryPage() {
   return (
     <main className="content-page summary-page">
       <section className="content-hero">
-        <p className="content-kicker">Introduction</p>
-        <h1>Summary and Story Overview</h1>
+        <p className="content-kicker">Summary</p>
+        <h1>Journey Through Memory</h1>
         <p>
-          “I Used to Live Here Once” is a work of short fiction by Jean Rhys first collected in Sleep It Off Lady (1976) by André Deutsch and Harper & Row (New York). A ghost story, “I Used to Live Here Once” is one the last works of fiction that Rhys wrote, and at roughly 400 words, perhaps her shortest.
+          A woman returns to a place she once knew intimately, moving through it
+          with confidence and recognition. However, subtle changes in the
+          landscape begin to create a quiet sense of unease.
         </p>
       </section>
 
       <section className="content-card-grid">
         <article className="content-card">
-          <h2>What Happens in the Story</h2>
+          <h2>The River Crossing</h2>
           <p>
-            A woman returns to a place that was once deeply familiar. At first she remembers
-            every detail: the river, the bridge, the road, and the house. But when she encounters
-            two children and speaks to them, they cannot seem to see her. Their fearful reaction
-            reveals a haunting truth: she no longer belongs to the world she is walking through.
+            She begins by crossing the river using familiar stepping stones,
+            remembering each one clearly. The journey feels controlled and
+            certain, as if her memory perfectly guides her movement.
           </p>
         </article>
 
         <article className="content-card">
-          <h2>Suggested Visual Motifs</h2>
+          <h2>The Changed Road</h2>
           <p>
-            Caribbean village details, river textures, bridge imagery, and soft tropical skies can
-            frame this page. The visuals should feel beautiful but distant, as if memory is present
-            while reality is already slipping away.
+            As she continues, the road appears wider but carelessly altered.
+            Trees lie fallen and the surroundings feel disturbed. Though she
+            recognizes the path, there is a growing sense that it is no longer
+            the same.
           </p>
         </article>
 
         <article className="content-card">
-          <h2>Atmosphere</h2>
+          <h2>The House and Familiar Absence</h2>
           <p>
-            The story combines nostalgia with a growing sense of unease. The tone and mood move from calm to chilling.
+            Reaching the house, she notices both familiarity and loss. Certain
+            landmarks remain, but others have disappeared, and the house itself
+            has been changed. The setting reflects a past that is no longer fully
+            intact.
+          </p>
+        </article>
+
+        <article className="content-card">
+          <h2>The Children</h2>
+          <p>
+            She sees two children and attempts to greet them, even telling them
+            she once lived there. However, they do not respond, creating a moment
+            of confusion and distance.
+          </p>
+        </article>
+
+        <article className="content-card">
+          <h2>The Realisation</h2>
+          <p>
+            When the boy suddenly remarks on the cold and leaves with the girl,
+            the truth becomes clear. In that moment, she understands that she is
+            no longer part of the living world.
           </p>
         </article>
       </section>
