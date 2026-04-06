@@ -43,7 +43,7 @@ const panels: StoryPanel[] = [
   {
     label: "IV",
     heading: "The House",
-    body: "Things have changed, the screw pine is gone, so too is the ajoupa. The clove tree and lawn are just as I remember. Now there's a house in all white, its strange to see a car in the yard...",
+    body: "Things have changed, the screw pine is gone, so too is the ajoupa. The clove tree and lawn are just as I remember. Now there's a house in all white, it's strange to see a car in the yard...",
     background: "/Old-white-house.png",
     ambientSound: "/sounds/the-house.mp3",
     ambientReverb: 0.15,
@@ -51,7 +51,7 @@ const panels: StoryPanel[] = [
   {
     label: "V",
     heading: "The Children",
-    body: "There were two children under the big mango tree, a boy and a little girl. I tried calling out to them, but they didn't respond. I started to walk towards them...",
+    body: "There are two children under the big mango tree, a boy and a little girl. I wave and call out to them, but they aren't responding. I'll try to walk towards them...",
     background: "/mango-tree-raw-green-mangoes-han.png",
     bgPosition: "bottom center",
     ambientSound: "/sounds/children-by-the-mango-tree.mp3",
@@ -60,7 +60,7 @@ const panels: StoryPanel[] = [
   {
     label: "VI",
     heading: "The Moment",
-    body: '"I used to live here once..." I said as I got closer, still to no response. I moved in closer, instinctively I tried to reach out to them...',
+    body: '"I used to live here once..." I say as I get closer, still to no response. I move in closer and instinctively reach out to them...',
     background: "/mango-tree-raw-green-mangoes-reaching-out.png",
     bgPosition: "bottom center",
     ambientSound: "/sounds/children-by-the-mango-tree.mp3",
@@ -69,7 +69,7 @@ const panels: StoryPanel[] = [
   {
     label: "VII",
     heading: "The Gaze",
-    body: "The boy then turned to look at me, his grey eyes stared into mine. However his expression didn't change. \"Hasn't it gone cold all of a sudden...\", he remarked to the girl. She agreed and they both left...",
+    body: "The boy turns to look at me, his grey eyes staring into mine. However, his expression doesn't change. \"Hasn't it gone cold all of a sudden...\", he remarks to the girl. She agrees, and they both leave...",
     background: "/vector-silhouette-boy-white-bac.png",
     shakeIntensity: 1,
     ambientSound: "/sounds/eerie-background.mp3",
@@ -78,7 +78,7 @@ const panels: StoryPanel[] = [
   {
     label: "VIII",
     heading: "The Silence",
-    body: "My arms fell back to my side as I watched them run across the grass to the house. That was when I understood...",
+    body: "My arms fall back to my sides as I watch them run across the grass to the house. I think... no. I understand now...",
     background: "",
     ambientSound: "/sounds/silence.mp3",
     ambientReverb: 0.15,
