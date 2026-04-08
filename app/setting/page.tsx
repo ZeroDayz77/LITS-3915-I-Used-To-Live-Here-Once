@@ -1,58 +1,40 @@
-export default function SettingsPage() {
+export default function SettingPage() {
   return (
-    <main className="content-page settings-page">
+    <main className="content-page setting-page">
       <section className="content-hero">
         <p className="content-kicker">Setting</p>
-        <h1>Memory and Displacement</h1>
+        <h1>Landscape, Memory, and Uncertainty</h1>
         <p>
-          She stands by the river, recalling each stepping stone. The landscape is
-          familiar, mapped in memory, yet something feels altered. The world is both
-          known and uncertain.
+          The setting carries emotional meaning in this story. Familiar geography appears in full
+          detail, but the world feels altered. This contrast between recognition and estrangement
+          deepens the haunting effect.
         </p>
       </section>
 
       <section className="content-card-grid">
         <article className="content-card">
-          <h2>The River Crossing</h2>
+          <h2>Core Environment Elements</h2>
           <p>
-            The stepping stones represent memory and control. Each one is remembered:
-            the safe stone, the slippery one, the easy path beyond. This careful
-            navigation suggests her confidence in the past.
+            Include the small bridge, river crossing, tropical hillside, and winding road. These
+            details root the narrative in a Caribbean landscape often linked to Jean Rhys&rsquo;
+            formative environment.
           </p>
         </article>
 
         <article className="content-card">
-          <h2>The Altered Landscape</h2>
+          <h2>Mysterious Atmosphere</h2>
           <p>
-            The road is wider but unfinished. Trees lie fallen, bushes trampled. The
-            sky is bright but strangely glassy. The setting reflects distortion, as
-            if memory and reality no longer align.
+            Keep the setting visually rich yet emotionally cold. Bright natural scenery can be
+            overlaid with muted tones, haze, or softened contrast to signal that the narrator is
+            present physically but displaced spiritually.
           </p>
         </article>
 
         <article className="content-card">
-          <h2>The House and Absence</h2>
+          <h2>Design Cue</h2>
           <p>
-            Familiar landmarks are gone: the screw pine, the ajoupa. The house is
-            changed. What remains is incomplete, reinforcing a sense of loss and
-            disconnection.
-          </p>
-        </article>
-
-        <article className="content-card">
-          <h2>The Children</h2>
-          <p>
-            The children do not see or hear her. Her attempt to connect fails. This
-            moment shifts the setting from nostalgic to unsettling.
-          </p>
-        </article>
-
-        <article className="content-card">
-          <h2>The Sudden Cold</h2>
-          <p>
-            When the boy speaks of the cold, the illusion breaks. The warmth of the
-            day collapses into a chilling realization. She no longer belongs to this
-            world.
+            As users scroll, transitions can subtly desaturate colors or dim the page to show the
+            shift from remembered warmth to ghostly isolation.
           </p>
         </article>
       </section>
