@@ -7,6 +7,7 @@ const worksCited = [
   "Free Audio Zone. \"Dark Ambient Sound Effect - Eerie Background.\" YouTube, 2026, https://www.youtube.com/watch?v=g0yQmVGla5U.",
   "Free Copyright Free Sounds - For Video Contents. \"🎵 No Copyright Free Creepy Eerie Scary Whisper Sound Effect.\" YouTube, 31 Mar. 2019, www.youtube.com/watch?v=R72rCF-fsyk.",
   "Goodbrey, Daniel. \"The Sound of Digital Comics.\" Writing Visual Culture 7, 2015, www.herts.ac.uk/__data/assets/pdf_file/0004/100786/wvc-dc-7-goodbrey.pdf.",
+  "“Home | Search the Archive | British Newspaper Archive.” The British  Newspaper Archive, britishnewspaperarchive.co.uk/.",
   "Jason Low. \"Sound Effects - Kids Laughing.\" YouTube, www.youtube.com/watch?v=NMPGKM9zg0M.",
   "nathanolson. \"Light Breeze Field Sound FX.\" YouTube, 10 Sept. 2015, www.youtube.com/watch?v=490z2QH6v5o.",
   "PureL - 5th Root. \"Page Turn Sound Effect.\" YouTube, 23 Dec. 2022, www.youtube.com/watch?v=SH_iqvnc0-4.",
