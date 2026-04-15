@@ -1,43 +1,101 @@
 .contentCardGrid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  position: relative;
-}
-
-.newspaper {
-  width: 100%;
-  background-color: transparent;
-  border: 1px solid transparent;
-  background-image: url('/transparent_paper.png');
-  background-size: 100% auto;
-  background-repeat: no-repeat;
-  background-position: center;
-  min-height: 400px;
-  position: relative;
-  z-index: 2;
-  transform: translateY(10px);
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
 }
 
 .charInfo {
-  flex: 1 1 calc(50% - 10px);
-  box-sizing: border-box;
   min-width: 0;
   background: rgba(255, 255, 255, 0.58);
   border: 1px solid rgba(95, 64, 38, 0.26);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   padding: 1rem;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
   word-break: break-word;
 }
 
+.charInfo h2,
+.charInfo h3 {
+  color: #2b1b10;
+  line-height: 1.35;
+}
+
+.charInfo h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.55rem;
+}
+
+.charInfo h3 {
+  font-size: 1.03rem;
+  margin: 0.8rem 0 0.35rem;
+}
+
+.charInfo p {
+  line-height: 1.7;
+  color: #2b1b10;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.returningWomanCard {
+  background: linear-gradient(180deg, rgba(247, 241, 223, 0.95) 0%, rgba(234, 224, 198, 0.9) 100%);
+  border: 1px solid rgba(103, 78, 47, 0.45);
+  box-shadow: 0 12px 24px rgba(58, 41, 22, 0.16);
+  position: relative;
+}
+
+.returningWomanCard h2,
+.returningWomanCard h3,
+.returningWomanCard p {
+  color: #24170d;
+}
+
+.returningWomanCard h2 {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-top: 2px solid rgba(95, 64, 38, 0.32);
+  border-bottom: 2px solid rgba(95, 64, 38, 0.32);
+  padding: 0.45rem 0;
+  margin-bottom: 1rem;
+}
+
+.returningWomanCard h3 {
+  line-height: 1.35;
+  font-size: 1.03rem;
+  margin: 0.8rem 0 0.35rem;
+}
+
+.returningWomanCard p {
+  line-height: 1.7;
+}
+
+.newspaperImage {
+  width: 100%;
+  min-height: 180px;
+  margin: -0.2rem 0 0.9rem;
+  background-image: url('/transparent_paper.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 1px solid rgba(120, 91, 56, 0.4);
+  filter: sepia(0.45) contrast(1.05);
+}
+
 .char {
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
 }
 
 @media (max-width: 768px) {
-  .charInfo {
-    flex: 1 1 100%;
+  .contentCardGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .newspaperImage {
+    min-height: 150px;
   }
 }
