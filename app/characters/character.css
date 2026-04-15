@@ -1,0 +1,64 @@
+/* =========================
+   PAGE LAYOUT
+========================= */
+.content-card-grid { 
+  display: flex; 
+  flex-wrap: wrap; /* allows side-by-side */
+  gap: 20px; 
+  position: relative; 
+} 
+
+/* =========================
+   NEWSPAPER (FULL WIDTH)
+========================= */
+.content-card-grid .newspaper { 
+  width: 100%; /* stays on top */
+
+  background-color: transparent; 
+  border: 1px solid transparent; 
+  background-image: url('/transparent_paper.png'); 
+  background-size: 100% auto; 
+  background-repeat: no-repeat; 
+  background-position: center; 
+
+  min-height: 400px; 
+  position: relative; 
+  z-index: 2; 
+  transform: translateY(10px); 
+} 
+
+/* =========================
+   CHARACTER CARDS (SIDE BY SIDE)
+========================= */
+.content-card-grid .char-info { 
+  flex: 1 1 calc(50% - 10px); /* 2 per row */
+  box-sizing: border-box;
+  min-width: 0; /* prevents text cutoff */
+
+  background: rgba(255, 255, 255, 0.58);
+  border: 1px solid rgba(95, 64, 38, 0.26);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+  padding: 1rem;
+
+  /* text wrapping fixes */
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* =========================
+   TEXT SPACING
+========================= */
+.char {
+  margin-bottom: 20px;
+}
+
+/* =========================
+   OPTIONAL: RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .content-card-grid .char-info {
+    flex: 1 1 100%; /* stack on small screens */
+  }
+}
