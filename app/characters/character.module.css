@@ -1,0 +1,43 @@
+.contentCardGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  position: relative;
+}
+
+.newspaper {
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid transparent;
+  background-image: url('/transparent_paper.png');
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 400px;
+  position: relative;
+  z-index: 2;
+  transform: translateY(10px);
+}
+
+.charInfo {
+  flex: 1 1 calc(50% - 10px);
+  box-sizing: border-box;
+  min-width: 0;
+  background: rgba(255, 255, 255, 0.58);
+  border: 1px solid rgba(95, 64, 38, 0.26);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  padding: 1rem;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.char {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .charInfo {
+    flex: 1 1 100%;
+  }
+}

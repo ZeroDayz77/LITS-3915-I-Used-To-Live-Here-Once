@@ -1,4 +1,4 @@
-import "./character.css"; 
+import styles from "./character.module.css";
 export default function CharactersPage() { 
   return ( 
     <main className="content-page characters-page"> 
@@ -6,14 +6,14 @@ export default function CharactersPage() {
         <p className="content-kicker">Character Study</p> 
       </section> 
       
-      <section className="content-card-grid"> 
-        <article className="newspaper"> 
+      <section className={styles.contentCardGrid}> 
+        <article className={styles.newspaper}> 
           <p> </p> 
         </article> 
         
-        <article className="char-info"> 
+        <article className={styles.charInfo}> 
           <h1>The Returning Woman</h1> 
-          <p className= "char"> The central figure is unnamed, which helps her become both individual and symbolic. She carries memory, longing, and disbelief as she revisits what once defined home. </p> 
+          <p className={styles.char}> The central figure is unnamed, which helps her become both individual and symbolic. She carries memory, longing, and disbelief as she revisits what once defined home. </p> 
           
           <h2>Identity and Presence</h2> 
           <p> She experiences the place as if she belongs to it, yet the living world does not recognize her. This creates tension between self-perception and social visibility. </p>
@@ -25,9 +25,9 @@ export default function CharactersPage() {
           <p> Light wind, rustling leaves, and flowing water can heighten unease. Ambient audio should feel natural at first, then gradually become hollow and colder as she reaches the house. </p> 
         </article>
 
-        <article className="char-info"> 
+        <article className={styles.charInfo}> 
           <h1>The Unknowing Children</h1> 
-          <p className= "char"> Two minor characters united as one enity that is meant to act as the mirror refelcting The Returning Woman's death and ultimately her into the realization that she has passed away.</p> 
+          <p className={styles.char}> Two minor characters united as one enity that is meant to act as the mirror refelcting The Returning Woman's death and ultimately her into the realization that she has passed away.</p> 
           
           <h2>Identity and Presence</h2> 
           <p> The children represent the living world, their identity rooted in visibility and mutual recognition. Their presence contrasts with the returning woman’s invisibility, emphasizing the divide between those who exist within life and those who do not.</p>
