@@ -1,4 +1,4 @@
-import "./characters.css"; 
+import "./character.css"; 
 export default function CharactersPage() { 
   return ( 
     <main className="content-page characters-page"> 
